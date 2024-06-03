@@ -1,5 +1,5 @@
 {
-  "name": "bun-hono-ts-mogodb-auth-api",
+  "name": "bun-hono-ts-mongodb-auth-api",
   "module": "index.ts",
   "type": "module",
   "scripts": {
