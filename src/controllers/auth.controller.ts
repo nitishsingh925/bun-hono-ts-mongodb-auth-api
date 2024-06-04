@@ -5,11 +5,13 @@ export const signup = async (c: Context) => {
   try {
     const { name, userName, email, password } = await c.req.json();
 
+    const hashPassword = await Bun.password.hash(password);
+
     const user = new User({
       userName,
       name,
       email,
-      password, // Ensure you hash the password before saving it in a real application
+      password: hashPassword,
     });
 
     // Save the user to the database
