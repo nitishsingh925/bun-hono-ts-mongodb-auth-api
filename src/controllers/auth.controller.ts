@@ -1,5 +1,8 @@
 import type { Context } from "hono";
+import { sign } from "hono/jwt";
+import { setSignedCookie } from "hono/cookie";
 import User from "../models/user.models";
+import { JWT_SECRET } from "../utils/constants";
 
 interface IUser {
   name: string;
@@ -54,6 +57,50 @@ export const signup = async (c: Context) => {
       { message: "User created successfully", user: createdUser },
       201
     );
+  } catch (error: any) {
+    // Return an error response
+    return c.json({ message: `Internal server error ${error.message}` });
+  }
+};
+
+interface ISignin {
+  email: string;
+  password: string;
+}
+
+export const signin = async (c: Context) => {
+  try {
+    const { email, password }: ISignin = await c.req.json();
+    const emailLower = email.toLowerCase();
+
+    // check if user with the given email exists
+    const user = await User.findOne({ email: emailLower });
+    if (!user) return c.json({ message: "User not found" }, 404);
+
+    // check if password is correct
+    const isPasswordCorrect = await Bun.password.verify(
+      password,
+      user.password
+    );
+    if (!isPasswordCorrect) return c.json({ message: "Invalid password" }, 401);
+
+    // Generate a JWT token
+    const accessToken = await sign({ userId: user._id }, JWT_SECRET);
+
+    const setCookieOptions = {
+      httpOnly: true, // Prevent client-side JavaScript access
+      secure: true, // Send cookie only over HTTPS connections (for production)
+      maxAge: 60 * 60 * 24 * 30, // 30 days
+    };
+    await setSignedCookie(
+      c,
+      "auth_token",
+      accessToken,
+      JWT_SECRET,
+      setCookieOptions
+    );
+    // Return a successful response
+    return c.json({ message: "User logged in successfully", accessToken }, 200);
   } catch (error: any) {
     // Return an error response
     return c.json({ message: `Internal server error ${error.message}` });
