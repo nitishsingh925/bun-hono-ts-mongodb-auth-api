@@ -12,10 +12,8 @@ export const signup = async (c: Context) => {
   try {
     const { name, userName, email, password }: IUser = await c.req.json();
 
-    // Validate the request
-    if (!name || !userName || !email || !password) {
-      return c.json({ message: "All fields are required" }, 400);
-    }
+    const userNameLower = userName.toLowerCase();
+    const emailLower = email.toLowerCase();
 
     // Check if user with the given email,username or password blank (empty) exists
     if ([email, userName, password].some((field) => field?.trim() === "")) {
@@ -23,7 +21,10 @@ export const signup = async (c: Context) => {
     }
 
     // Check if the user already exists
-    const existedUser = await User.findOne({ $or: [{ email }, { userName }] });
+    const existedUser = await User.findOne({
+      $or: [{ email: emailLower }, { UserName: userNameLower }],
+    });
+
     if (existedUser) return c.json({ message: "User already exists" }, 409);
 
     // Hash the password
@@ -36,9 +37,9 @@ export const signup = async (c: Context) => {
 
     // Create a new user instance
     const user = new User({
-      userName: userName.toLowerCase(),
       name: capitalizeName(name),
-      email: email.toLowerCase(),
+      userName: userNameLower,
+      email: emailLower,
       password: hashPassword,
     });
 
@@ -53,8 +54,8 @@ export const signup = async (c: Context) => {
       { message: "User created successfully", user: createdUser },
       201
     );
-  } catch (error) {
+  } catch (error: any) {
     // Return an error response
-    return c.json({ message: `Internal server error ${error}` });
+    return c.json({ message: `Internal server error ${error.message}` });
   }
 };
