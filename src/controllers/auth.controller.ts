@@ -1,6 +1,6 @@
 import type { Context } from "hono";
 import { sign } from "hono/jwt";
-import { setSignedCookie } from "hono/cookie";
+import { deleteCookie, setSignedCookie } from "hono/cookie";
 import User from "../models/user.models";
 import { JWT_SECRET } from "../utils/envHandler";
 
@@ -105,6 +105,19 @@ export const signin = async (c: Context) => {
     );
     // Return a successful response
     return c.json({ message: "User logged in successfully", accessToken }, 200);
+  } catch (error: any) {
+    // Return an error response
+    return c.json({ message: `Internal server error ${error.message}` });
+  }
+};
+
+export const signout = async (c: Context) => {
+  try {
+    // Clear the authentication cookie
+    deleteCookie(c, "auth_token");
+
+    // Return a successful response
+    return c.json({ message: "User logged out successfully" }, 200);
   } catch (error: any) {
     // Return an error response
     return c.json({ message: `Internal server error ${error.message}` });
