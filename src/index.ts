@@ -1,6 +1,6 @@
 import { app } from "./app";
 import connectDB from "./db/connect.db";
-import { PORT } from "./utils/constants";
+import { PORT } from "./utils/envHandler";
 
 const startServer = async () => {
   try {
@@ -16,4 +16,4 @@ const startServer = async () => {
   }
 };
 
-startServer(); // Call the async function to start the server
+startServer();

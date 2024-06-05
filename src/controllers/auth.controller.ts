@@ -2,7 +2,7 @@ import type { Context } from "hono";
 import { sign } from "hono/jwt";
 import { setSignedCookie } from "hono/cookie";
 import User from "../models/user.models";
-import { JWT_SECRET } from "../utils/constants";
+import { JWT_SECRET } from "../utils/envHandler";
 
 interface IUser {
   name: string;
