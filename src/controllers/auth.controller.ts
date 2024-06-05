@@ -64,17 +64,21 @@ export const signup = async (c: Context) => {
 };
 
 interface ISignin {
-  email: string;
+  userName?: string;
+  email?: string;
   password: string;
 }
 
 export const signin = async (c: Context) => {
   try {
-    const { email, password }: ISignin = await c.req.json();
-    const emailLower = email.toLowerCase();
+    const { userName, email, password }: ISignin = await c.req.json();
+    const emailLower = email ? email.toLowerCase() : null;
+    const userNameLower = userName && userName.toLowerCase();
 
-    // check if user with the given email exists
-    const user = await User.findOne({ email: emailLower });
+    // check if user with the given email or username exists
+    const user = await User.findOne({
+      $or: [{ email: emailLower }, { userName: userNameLower }],
+    });
     if (!user) return c.json({ message: "User not found" }, 404);
 
     // check if password is correct
