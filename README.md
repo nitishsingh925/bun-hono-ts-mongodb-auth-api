@@ -21,4 +21,9 @@ To Development Start:
 bun dev
 ```
 
+# [Postman documentation link](https://documenter.getpostman.com/view/32438779/2sA3QzYTbM)
+
+https://documenter.getpostman.com/view/32438779/2sA3QzYTbM
+
+
 This project was created using `bun init` in bun v1.1.11. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
