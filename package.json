@@ -4,16 +4,17 @@
   "type": "module",
   "scripts": {
     "start": "bun src/index.ts",
-    "dev": "bun --watch src/index.ts"
+    "dev": "bun --watch src/index.ts",
+    "start:dev": "bun --hot src/index.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"
   },
   "peerDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.4.5"
   },
   "dependencies": {
-    "hono": "^4.4.2",
-    "mongoose": "^8.4.1"
+    "hono": "^4.4.10",
+    "mongoose": "^8.4.4"
   }
 }
