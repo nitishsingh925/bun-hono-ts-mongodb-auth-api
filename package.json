@@ -14,7 +14,7 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "hono": "^4.5.0",
+    "hono": "^4.5.2",
     "mongoose": "^8.5.1"
   }
 }
