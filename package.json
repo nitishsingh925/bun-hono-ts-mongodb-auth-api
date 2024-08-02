@@ -13,7 +13,7 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "hono": "^4.5.2",
-    "mongoose": "^8.5.1"
+    "hono": "^4.5.3",
+    "mongoose": "^8.5.2"
   }
 }
