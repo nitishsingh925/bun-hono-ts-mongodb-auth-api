@@ -10,4 +10,6 @@ app.use(logger());
 app.get("/", (c) => c.text("Hono! with Bun"));
 
 app.route("/api/v1/auth", authRouter);
+
+app.use("*", async (c) => c.json({ message: "Route not found 404" }, 404));
 export { app };
