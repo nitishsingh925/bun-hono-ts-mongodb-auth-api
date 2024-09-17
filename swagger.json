@@ -1,32 +1,92 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "API Documentation",
+    "title": "Bun Hono TS MongoDB Auth API",
     "version": "1.0.0",
     "description": "This is the API documentation for your project."
   },
   "paths": {
-    "/api/v1/users": {
-      "get": {
-        "summary": "Get all users",
+    "/api/v1/auth/signup": {
+      "post": {
+        "summary": "Sign up a new user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "userName": { "type": "string" },
+                  "email": { "type": "string" },
+                  "password": { "type": "string" }
+                },
+                "required": ["userName", "email", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "409": {
+            "description": "User already exists"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/signin": {
+      "post": {
+        "summary": "Sign in a user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userName": { "type": "string", "nullable": true },
+                  "email": { "type": "string", "nullable": true },
+                  "password": { "type": "string" }
+                },
+                "required": ["password"]
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": "A list of users",
+            "description": "User logged in successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": { "type": "string" },
-                      "name": { "type": "string" },
-                      "email": { "type": "string" }
-                    }
+                  "type": "object",
+                  "properties": {
+                    "accessToken": { "type": "string" }
                   }
                 }
               }
             }
+          },
+          "401": {
+            "description": "Invalid credentials"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/signout": {
+      "post": {
+        "summary": "Sign out a user",
+        "responses": {
+          "200": {
+            "description": "User logged out successfully"
           }
         }
       }
