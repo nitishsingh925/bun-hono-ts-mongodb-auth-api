@@ -146,3 +146,16 @@ export const signoutService = async (c: Context) => {
     throw new Error(error.message);
   }
 };
+
+// Get user profile by ID service
+export const getUserProfileById = async (userId: string) => {
+  try {
+    const user = await User.findById(userId).select("-password"); // Exclude password
+    if (!user) {
+      throw new Error("User not found");
+    }
+    return user;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};

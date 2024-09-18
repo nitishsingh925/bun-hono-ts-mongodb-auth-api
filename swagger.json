@@ -90,6 +90,45 @@
           }
         }
       }
+    },
+    "/api/v1/auth/profile": {
+      "get": {
+        "summary": "Get current user's profile",
+        "responses": {
+          "200": {
+            "description": "User profile fetched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string" },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "name": { "type": "string" },
+                        "userName": { "type": "string" },
+                        "email": { "type": "string" },
+                        "password": {
+                          "type": "string",
+                          "description": "Password is not returned"
+                        }
+                      },
+                      "required": ["name", "userName", "email"]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
     }
   }
 }
