@@ -2,6 +2,7 @@ import { app } from "./app";
 import connectDB from "./db/connect.db";
 import { PORT } from "./utils/envHandler";
 
+// Start Server 
 const startServer = async () => {
   try {
     await connectDB();
