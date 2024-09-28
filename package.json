@@ -15,7 +15,7 @@
   "dependencies": {
     "@hono/swagger-ui": "^0.4.1",
     "hono": "^4.6.3",
-    "mongoose": "^8.6.3",
+    "mongoose": "^8.7.0",
     "zod": "^3.23.8"
   }
 }

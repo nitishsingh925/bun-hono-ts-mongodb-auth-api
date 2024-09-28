@@ -16,10 +16,13 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "name": { "type": "string" },
-                  "userName": { "type": "string" },
-                  "email": { "type": "string" },
-                  "password": { "type": "string" }
+                  "name": { "type": "string", "example": "Nitish" },
+                  "userName": { "type": "string", "example": "nitish123" },
+                  "email": {
+                    "type": "string",
+                    "example": "nitish@example.com"
+                  },
+                  "password": { "type": "string", "example": "password123" }
                 },
                 "required": ["userName", "email", "password"]
               }
@@ -49,9 +52,17 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "userName": { "type": "string", "nullable": true },
-                  "email": { "type": "string", "nullable": true },
-                  "password": { "type": "string" }
+                  "userName": {
+                    "type": "string",
+                    "nullable": true,
+                    "example": "nitish123"
+                  },
+                  "email": {
+                    "type": "string",
+                    "nullable": true,
+                    "example": "nitish@example.com"
+                  },
+                  "password": { "type": "string", "example": "password123" }
                 },
                 "required": ["password"]
               }
@@ -66,7 +77,10 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "accessToken": { "type": "string" }
+                    "accessToken": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+                    }
                   }
                 }
               }
@@ -102,13 +116,22 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": { "type": "string" },
+                    "message": {
+                      "type": "string",
+                      "example": "Profile retrieved successfully"
+                    },
                     "user": {
                       "type": "object",
                       "properties": {
-                        "name": { "type": "string" },
-                        "userName": { "type": "string" },
-                        "email": { "type": "string" },
+                        "name": { "type": "string", "example": "Nitish" },
+                        "userName": {
+                          "type": "string",
+                          "example": "nitish123"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "nitish@example.com"
+                        },
                         "password": {
                           "type": "string",
                           "description": "Password is not returned"
