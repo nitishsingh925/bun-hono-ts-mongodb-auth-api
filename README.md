@@ -26,6 +26,11 @@ bun dev
 
 https://documenter.getpostman.com/view/32438779/2sA3QzYTbM
 
+
+# swagger ui
+
+http://localhost:3000/api
+
 This project was created using `bun init` in bun v1.1.30. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
 
 # Docker coming soon
