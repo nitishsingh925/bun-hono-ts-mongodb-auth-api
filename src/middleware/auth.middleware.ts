@@ -4,6 +4,8 @@ import { JWT_SECRET } from "../utils/envHandler";
 import { HTTP_STATUS } from "../utils/httpStatus";
 import { verify } from "hono/jwt";
 
+
+
 export const authenticateUser = async (c: Context, next: Next) => {
   try {
     // Retrieve and decode the JWT from the signed cookie
